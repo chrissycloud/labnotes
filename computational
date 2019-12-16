@@ -1,0 +1,208 @@
+Computational Study Sheet
+
+Roots of Equations
+
+	Bracketing Methods
+		-Using graphical methods
+			BISECTION TECHNIQUE (fast)
+-Estimate of root is: x_f=  (x_l+ x_u)/2  by choosing upper and lower guesses so function changes sign over interval, and doing evaluations to determine in which subinterval root lies
+			FALSE POSITION (more accurate roots)
+				-First estimate is a false estimate of root + iterates
+-Similar to BISECTION TECHNIQUE but takes account of magnitude of function on either bound of interval
+-New x-value always replaces older value, that has same sign in function value as f(x_r)
+-x_r (intermediate root estimate)= x_u-  (f(x_u)(x_l- x_u))/(f(x_l )-f(x_u)) 
+			MODIFIED FALSE POSITION
+				-Solves FPM problem of convergence being slow
+-Halves function value at “stuck” bound, by detecting if bound hasn’t moved in a while
+	Incremental Search Techniques
+-Choose one point at either end of interval, then function evaluated at increments moving towards real root
+Open Roots Finding Methods
+-Single fixed-point iteration implemented by taking known equation and expressing in terms of x, allows one to predict new value of x
+		TWO POINT GRAPHICAL METHOD
+-Breaks complex or many termed function into series of composite functions
+-Iteration until convergence
+		NEWTON RAPHSON TECHNIQUE (efficient)
+-Initial root, x_i used to evaluate function value from tangent line drawn to x axis, which continues until f(x) -> 0.
+-x_(i+1)= x_i-  (f(x_i))/(f'(x_i))
+-Each successive estimate error approximately square root of previous one
+		SECANT TECHNIQUE
+			-Calculates approximation to point derivative
+			-Replaces successive values in sequence, with no guarantee 				two estimates in any iteration will bracket root
+			-Similar to Newton Raphson
+		MODIFIED SECANT TECHNIQUE
+			-Two separate points used to compute derivative
+-New derivative calculated by retaining one old point and taking small increment on value
+-x_(i+1)= x_i-  (δx_i f(x_i))/(f(x_i+ δx_i )-f(x_i))
+			INVERSE QUADRATIC INTERPOLATION
+				-Replaces secant with parabola
+				-Inverted parabola that cuts the curve of interest in two points
+Brent Technique
+-Combines certainty of bracket techniques, with speed and convergence of open search
+-One iteration required, because first root evaluation guaranteed to find parabola root
+-Always real root for sideways parabola
+Multiple (Repeated) Root Technique
+	-Exits for condition that point on function touches x-axis
+	-Only open search methods may be used to solve
+Ralston-Rabinowitz For Multiple Roots
+	-Can solve for quadratically convergent in vicinity of repeated root
+-x_(i+1)= x_i-  (f(x_i )f'(x_i))/(〖[f^' (x_i )]〗^2-f(x_i )f''(x_i))		
+
+Roots of Equation Systems
+	NEWTON-RAPHSON
+		-Use more than core NR
+-Polynomial deflation=process of removing known root from calculation as soon as it has been determined to avoid repeat computation
+		Muller’s Technique
+-Variant of secant technique, instead of projecting a line to the x-axis, it projects a parabola
+-Example of second degree polynomial:
+f_2 (x)=a〖(x-x_2)〗^2+b(x-x_2 )+c
+	Bairstow
+		-Accommodate root guesses that result in a remainder
+		-f_5 (x)=(x+1)(x-4)(x-5)(x+3)(x-2)
+-If r is a factor, leaving no remainder after long division, then the value r of the factor (x-r) is a root of the equation
+-If (x-r) not a factor, Bairstow’s technique attempts to iterate the process until this remainder is reduced to zero or to within a tolerable error
+-If t is a root of the first polynomial, then b0=0
+-Key to method is determine the values of r and s that make R=0
+
+Numerical Integration
+
+	Quadrature Techniques
+		RECTANGLE RULE
+			-∫_a^b▒〖f(x)dx ≈h ∑_(n=0)^(N-1)▒〖f(x_n)〗〗
+			Where h=(b-a)/N and x_n=a+nh
+-Choose how many rectangles to approximate function
+		TRAPEZOIDAL RULE
+			-∫_a^b▒〖f(x)dx ≈(b-a)[(f(a)+f(b))/2]〗
+-Choose how many trapezoids to approximate function
+		SIMPSON’S RULE
+			-∫_a^b▒〖f(x)dx ≈(b-a)/6[f(a)+4f((a+b)/2)+f(b)]〗
+-Choose how many intervals to approximate function
+	Adaptive Algorithm Techniques
+		-Allow intervals to be subdivided as necessary during numerical integration if 		sufficient accuracy not achieved after n steps
+		-Applied dynamically within any of the three quadrature techniques
+
+
+Gauss Quadrature
+
+-Determine constants in following approximation for integral, and use graph below as derivation/proof of technique
+I ≅ c_0 f(x_0 )+c1f(x_1)
+-Relate domain of interest to interval -1<x<1 by variable transformation
+-Any domain of x that we choose
+-Only requires two function evaluations
+-Equivalent in accuracy to four intervals of trapezoidal technique
+
+Solving Simultaneous Equations
+
+Cramer’s Rule
+	-Uses matrix algebra and determinants
+	-Allows solution of each unknown to be written in a similar fashion as below:
+	-x_1=(|■(b_1&a_12&a_13@b_2&a_22&a_23@b_3&a_32&a_33 )|)/D
+	-Not computationally efficient for systems involving more than 3 equations
+
+Elimination of Unknowns
+	-More effective technique for more than 3 equations
+-Multiply both equations with different coefficients from the other equation to eliminate an unknown
+-Subtract lower from upper to solve for one of the unknowns 
+-Isolate unknown, and reverse substitute into either of original equations
+
+Naïve Gauss Elimination
+	-Systemises process of forward elimination and reverse substitution
+	-Implement a manipulation
+ 
+ 
+-First equation remains unchanged in revised matrix after this and subsequent operations
+-Second phase is a repeat of manipulation from third equation downward
+ 
+-Unlike Cramer’s, technique can be computerised as a recognisable, repeatable algorithm
+-Requires high number of floating-point operations/flops
+-Accumulate inaccuracies due to round-off error
+-Ill-conditioned systems are not suited to solution using NGE
+IMPROVE:
+-Use of more significant figures in computations to reduce round-off error
+-Use of partial or full pivoting (identify zero-coefficients, or near zero-coefficients and switch row with one container much larger coefficients in same position).
+
+Optimisation
+	Mathematically, optimal point on function is where gradient is flat (max or min)
+ 
+	
+	Two main types of optimisation:
+		One dimensional (2 d curve)
+		Two dimensional (3d functional surface)
+
+Linear programming: If both function and constraints are linear
+Quadratic: f(x) is quadratic but constraints are linear
+Non-linear: If f(x) and constraints are non-linear
+
+Degrees of freedom: calculated by n-p-m
+N= dimensions in x vector, p=equality constraints, m=inequality constraints
+Solution obtainable: m+p<n, over constrained if (m+p)>n
+
+	Basic One-Dimensional Search: GOLDEN SEARCH TECHNIQUE
+		-Relies on selecting 2 estimate points on either side of max or min
+ 
+		-Use following equations: l_o= l_1+l_2 and l_1/l_0 =  l_2/l_1  to form: l_1/(l_1+〖 l〗_2  )=  l_2/l_1 
+	Two situations can arise: 
+F(x1)>f(x2), then all points left of x2 can be eliminated as no max can occur there, x2 becomes leftmost point of interest
+
+F(x1)<f(x2), then all points right of x1 eliminated, and x1 becomes new xu for next iteration
+
+ 
+	
+		Golden Ratio has havled number of necessary function evaluations
+
+		Continues until x1 and x2 converge on max point (convergence guaranteed)
+
+	Approximation error for optimal x: ∈_a=(1-R)  |(x_u- x_1)/x_opt |100% (R=golden ratio)
+
+	Parabolic Interpolation
+		-Parabola or quadratic curve can often provide very good approximation
+			 
+-If we suspect optimum point lies in interval of any three points on a curve, fit those three points with unique parabola
+-Differentiate parabola to find maximum point that is then estimate for true parabola of test function
+ 
+-x0, x1, x2 are initial guesses, x3 is calculated approximation to xopt point, and delivers maximum of f(x)
+**If x3 does not change through  last 3 iterations of the algorithm, this means the routine has converged on a maximum function point**
+
+
+	Newton’s Method (Optimisation)
+		-Optimum value is the root of the gradient function f’(x)
+-Simply find root of f’(x), by rewriting previous Newton’s equation in terms of 
+Functions
+ 
+**Important that algorithm progresses to 0, to sufficient decimal accuracy**
+-Newton’s technique can quickly diverge, if initial case is not sufficiently close
+
+	Brent’s Method (Optimisation)
+		-Basis for official optimisation routine in MATLAB
+		-Combines parabolic interpolation and golden search technique in one code
+**If new xm-x is less than tol, fu is function maximum as required
+
+	Newton’s Method (Two-variable Optimisation)
+-First derivative of function shows how steep, and whether local maximum of minimum exists (when f’(x)=0)
+-Second derivative shows whether local stationary point of function is max or min
+-For 2 variable optimisation, a further condition is needed to establish whether maximum or minimum exists
+-For cases where only one function is being evaluated in multiple variables or dimensions, Jacobian reduces to just first row
+-Hessian Matrix: Newton technique will only calculate a meaningful new estimate if H-1 is non-zero
+
+Optimisation 2
+-Univariate optimisation can be performed using the standard fminbnd function (in cases where only one variable is being optimised, this function would be used)
+-Multivariate, multiconditional optimisation can be performed using standard fmincon function (caters for constraints that include inequalities and equalities that need to be defined, and needs a domain of x within to operate)
+
+Rosenbrock’s Function
+	-Traditional optimisation test with 2 variables
+	-Can impose linear equality constraints on top of inequality constraints
+
+**If you can formulate one master optimisation function with all of the variable arguments that need optimisation, you can determine values for 1 < x< n if mathematically feasible**
+
+**But previous optimisations may have constrained ability to optimise in each new equation**
+
+Solving Ordinary Differential Equations
+-Some ODEs difficult due to nature (like curvature of function)
+
+Van der Poll system (classic stuff ODE)
+-Has areas of gently and steep gradients, that makes progress of solution difficult
+
+PDEs can be solved using 2 dedicated special functions
+	-pdepe (solve initial-boundary value problems for parabolic-elliptic PDEs in
+ 1-D analytically, aka returns the function that is the solution to the ODE)
+-pdeval (evaluated numerical solution using output of pdepe)
+
