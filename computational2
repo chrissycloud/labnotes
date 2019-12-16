@@ -1,0 +1,222 @@
+Explanation of each Laboratory
+
+Lab 1: Using loops to perform summations
+	Exercise 1: Calculate the sum of squares of the first 20 odd natural numbers
+
+After defining the number of iterations, we can set the initial value of the sum to zero. This value will then update at every cycle of the ‘for’ loop for each number from 1 to 20 (my selected number).
+Adding the square of the iteration number, I, to the stored number, which is 0 before the first iteration, we can end the process once 1=n and nth value of the function has been computed. The final value is the sum that we have sought to compute.
+		
+	Exercise 2: Approximating and calculating error
+
+	We can define solold as the previous iteration of sol, so the formula describing lnx in a series is being used to calculate iterations. We keep the series iterating b
+
+Lab 2: Finding Roots of Equations Numerically
+	Exercise 1: Bisection Code
+
+The bisection technique works as follows:
+
+-Choose upper and lower bound guesses for the root so that the function changes sign over the interval. This can be checked by ensuring that f(xl)f(xu)<0.
+-An estimate of the root is obtained by xr= (xl+xu)/2
+-Make the following evaluations to determine in which subinterval the root lies:
+(a) If f(xl)f(xr) <0, the root lies in the lower subinterval. Thus, set xu=xr and return to step 2.
+(b) If f(xl)f(xr)>0, the root lies in the upper subinterval. Therefore, set xl = xr and return to step 2
+(c) If f(xl)f(xr) =0, the root equals xr; so the computation can be terminated.
+
+This technique did 100 iterations, to ensure the algorithm didn’t proceed to infinity.
+
+This answer was comparable to (a), and a Matlab version of the quadratic formula was computed to further verify the answer, which it did.
+
+	Exercise 2: False Position Code
+
+	Exercise 3: Newton-Raphson
+
+-The basis of the technique is the following equation: 
+x_(i+1)= x_i-  (f(x_i))/(f'(x_i))
+-An initial root value, xi, is used to evaluated a function value f(xi), from which a tangent line is drawn to the x axis to produce a next estimate for the root xi+1
+-The process continues until the function f(x) approximates 0 to within an error
+
+
+Lab 3: Numerical Integration
+	Exercise 1: Midpoint, trapezoidal, Simpson’s Rule yep
+
+		We can format 3 column vectors to record integral values for 1 to N.
+
+We can then implement the trapezoidal rule which steps forward in X by p times dx increments, but steps back by half a step each time.
+
+We can then implement the trapezoidal rule, which steps forwards in X by q times dx increments.
+
+It is then important to check whether the answer is an even or odd term, from where we vary the coefficient accordingly.
+
+We can then plot the integral as a function of number of intervals, N.
+	
+Exercise 2: Use of an Adaptive Algorithm: Changing step size during numerical integration routine
+
+You will need to define your function first before you can use this code: this will either be by 
+Defining it explicitly in the code (less user friendly and flexible)
+Requesting the user to define it as an input request before the code runs (more user friendly) Note: This is a two part code. 
+The first part (quadapt) defines the function at two limits of the integration (a, b) and the midpoint of this integration interval (c). The second part (qstep) defines subintervals for integration between a and c, and between c and b for calculating sub interval integrals.
+
+
+	Exercise 3: Gauss Quadrature
+
+-Determine constants in following approximation for integral, and use graph below as derivation/proof of technique
+I ≅ c_0 f(x_0 )+c1f(x_1)
+-Relate domain of interest to interval -1<x<1 by variable transformation
+-Any domain of x that we choose
+-Only requires two function evaluations
+-Equivalent in accuracy to four intervals of trapezoidal technique
+
+
+Lab 4: Roots of Multiple Equations and Polynomial Deflation, Root Finding
+	Exercise 1: Simple factorisation using Matlab
+
+		A polynomian fn(x) is divided by a factor (x-r).
+R=remainer; n is degree of polynomial, a(i) are oefficients of each quotient determined in increasing order of x.
+
+	Exercise 2: Newton’s Method for 2 equations
+
+	Exercise 3a: Factorisation by quadratics
+
+	Exercise 3b: Standard factorisation functions in Matlab
+
+	Exercise 4: Muller’s method change it
+
+Lab 5: Optimisation 1
+
+	Exercise 1: Optimisation using GS 
+
+Relies on selecting 2 estimate points on either side of max or min
+
+Two situations can arise: 
+F(x1)>f(x2), then all points left of x2 can be eliminated as no max can occur there, x2 becomes leftmost point of interest
+
+F(x1)<f(x2), then all points right of x1 eliminated, and x1 becomes new xu for next iteration
+	
+			Golden Ratio has havled number of necessary function evaluations
+
+Continues until x1 and x2 converge on max point (convergence guaranteed)
+
+Approximation error for optimal x: ∈_a=(1-R)  |(x_u- x_1)/x_opt |100% (R=golden ratio)
+
+In this, we can define the golden ratio as R, define the lower and upper limits of the initial search region. We can then Calculate inner search points, x1 and x2 using GR.
+
+Set x1 or x2 as the initial dummy optimisation value xopt depending on whether f1 > or < f2 Reset d (the floating golden interval) to R times its original value.
+
+Recompare f1 and f2 to decide which is greater. If f1 is greater than f2 , set xl to x2 , and x2 now becomes x1 , while the old x1 is reset to xl +d. Similarly f2 is reset to f1 (f1 is now explicitly set to f(x1 )). Otherwise, if f1 is less than f2 , set xu to x1 , and xl now becomes x2 , while the old x2 is reset to xu -d. Similarly f1 is reset to f2 (f2 is now explicitly set to f(x2 ). We now move to the next iteration and implement another test of the values of the inner function values f1 and f2
+
+If xopt is not zero, calculate the approximation error, ea. If it is less than acceptable error, es, xopt is accepted as the optimum x-value for maximisation. If not DO repeats.
+
+
+	Exercise 2: Optimisation using GS and Parabolic Interpolation (Brent’s Method)
+
+	Exercise 3: Optimisation using Newton’s Method
+
+Perform an iterative loop while the norm of matrix J (the Jacobian matrix) is < preset error. 
+
+The new x,y estimates (i+1) are the existing values of x and y minus the inverse of H times the Jacobian (matrix of first derivatives). This is newton’s algorithm in matrix ‘disguise’. 
+
+For i iterations, create two holding variables for the x and y co-ordinates.
+
+Create a table T listing iterations, and the two co-ordinates as the optimisation progresses. 
+
+Use the fcontour command to create a contour plot of the three dimensional function surface in plan view. 
+
+Print the output values of the algorithm to the table you created above.
+
+If the norm of the J matrix is less than the error e, then the minimum value has been attained to within specified error tolerance, e. 
+
+Print the value of the function and the x,y coordinates for the optimised value of the function (i.e. its minimum value).
+
+
+Lab 6: Optimisation 2 and ODEs
+
+	Exercise 1: Optimising Rosenbrock’s Function
+
+This is a multivariate, multiconditional optimisation, that can be calculated using the fmincon function, using the specified values needed to input for the call function.
+We can then fix one of these variables to one value, like x2=0.25, and optimise the function for x1.
+
+	Exercise 2: Tank Optimisation
+
+The objective function for this optimisation was
+ Here, C is total cost, cm is material cost per unit mass of material, cw is welding cost per m of weld, and lw is weld length. 
+Use fmincon to optimise the dimensions of this tank to minimise both the cost of material and cost of welding subject to the conditions and constraints
+
+Further information needed to complete this optimisation is as follows: 2. The volume of its cylindrical side wall can be computed as follows 3. The volume of each of its end plates is: 4. Thus, the mass of the total tank is given by: 5. Here, we have multiplied the tank material volume by the steel density, rho. 6. Weld length also needs to be minimised to minimise cost, so we need to define a function for this also as follows:
+
+Now we calculate the constraints on the problem. Firstly, the volume, V0 , of the tank (i.e., its hollow volume) is fixed. 8. The remaining constraints are the bed dimensions of the truck as follows: 9. Our task is now expressible as follows (mathematically), where 4.5 and 20 are the cost coefficients of the material and the welding, respectively.
+
+
+	Exercise 3: Solving a difficult ODE in Matlab
+
+Lab 7: Practical Problems solved using Matlab
+
+	Exercise 1: Matrix of stress values
+
+
+	Exercise 2: Deflection of non-linear spring under weight
+
+		Similar to example 3
+
+	Exercise 3: Four masses connected by linear springs
+
+We set up the 2 differential equations, and then use an ODE to solve. We can input the conditions required and then used ode45 to solve and get the required graph.
+
+Lab 8: Practical Problems with solution strategies
+
+	Exercise 1: Numerical Integration on uniform beams subjected to distributed loads
+
+The following equations need to be formulated numerically. Firstly, deflection y is formulated analytically as: Discretising to calculate numerically (e.g. trapezoid) The moment is isolated to give the following expression: Again this can be discretised for computation as: The shear can be discretised as follows in turn:
+
+The moment curve along the beam is plotted by discretising the derivative of theta as per the second equation In the third column of the table opposite, the term in brackets is evaluated using current and previous values of x and θ in a process of calculating finite differences (a numerical approximation to the exact derivative). The fourth column is simply the product of this ratio with EI to give the local moment, M, at that position xi If desired this can be plotted as a function of moment, M, v. axial beam co-ordinate, x.
+
+The moment curve along the beam is plotted by discretising the derivative of the axial moment function as per this equation In the fourth column of the table opposite, the last ratio of the equation above is evaluated using current and previous values of x and θ. The sixth column records the finite difference calculation for the shear function, while the last column shows the analytically calculated value. Note how close the finite difference and analytical values are to each other. If desired this can be plotted as a function of moment, M v. axial beam co-ordinate, x.
+
+
+	Exercise 2: Spherical tank with a flow rate
+
+Firstly, you need to realise that the filled volume of the tank is ‘buried’ in the expression and can be related to H.
+
+
+	Exercise 3: Calculate deflection of mast
+
+Firstly, we express the second order derivative equation by two simpler constituent first order equations. The proceed to solve as two ODEs, solving first the second equation and secondly the first. You can use ode23, or Euler, or Runge-Kutta (not covered this year but a common solution strategy for ODEs).
+
+Integrate dH/dt numerically to find H = 0
+
+Lab 10: Thursday 21 November
+
+	Exercise 1: Calculations for hanging cable tension
+
+We can use a short cut matlab tool to double differentiate the integrated equation to obtain y’’. Then we can prove this satisfies equation B by using substitution in the two relevant places.
+
+The second part of this question is just using the Newton Raphson root finding technique to figure out the maximum tension.
+
+-The basis of the technique is the following equation: 
+x_(i+1)= x_i-  (f(x_i))/(f'(x_i))
+-An initial root value, xi, is used to evaluated a function value f(xi), from which a tangent line is drawn to the x axis to produce a next estimate for the root xi+1
+-The process continues until the function f(x) approximates 0 to within an error
+
+
+	Exercise 2: Minimising structural volume in truss
+
+Lab 11: Thursday 28 November
+
+	Exercise 1: Calculations for optimal pipe cross section under load
+
+This is a cost minimisation problem, so we need to find the objective function that expresses cost in terms of the cross-sectional area of the pipe. Since we have the dimension of the pipe, its density, and the cost per kg of the pipe, we are able to accomplish this.
+
+The maximum stress on the pipe is an inequality constant, as the stress may never exceed 80% of the breaking stress of the pipe. This provides a floor to the optimisation, so that the final thickness can never be 0mm, or have a diameter of 0mm, which would not be possible.
+
+We are able to use the fmincon function to solve this problem, as we have defined an objective function, upper and lower boundaries for each variable, and have the known inequality constraint.
+
+After defining parameters, we can use linspace to create search vectors for diameter and thickness. 
+
+The I index represents the thickness, while the j index represents the diameter, so we can define these index sizes for calculation loops, and from this, create a matrix that will receive the calculated stress values for various combinations of thickness and diameter, with the stress value represented by s.
+
+A loop is then performed to calculate section area, outer radius, inner radius, moment of area, and stress for each of the combinations of diameter and thickness in search space.
+
+The mat_s matrix will then store the latest value of s for each loop iteration, while Sa calculated and stores the applied stress at each diameter and thickness point.
+
+A second loop will then create a test variable, and uses an if test to compare whether the applied stress is lower than 80% of the compressive breaking stress of the pipe.
+
+For the last section of the question, the od and ot variables store the optimal values of d and t, so that they are the lowest values that respect the stress inequality constant.
